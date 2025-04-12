@@ -11,17 +11,17 @@ interface InputData {
 export const inputServer = functions.https.onRequest(async (req, res) => {
   const data: InputData = req.body;
   if (!data.input) {
-    res.status(400).send('Missing input');
+    res.status(400).send("Missing input");
     return;
   }
 
-  await db.collection('liveData').add({
+  await db.collection("liveData").add({
     input: data.input,
     timestamp: admin.firestore.FieldValue.serverTimestamp(),
   });
 
   console.log("Input stored from Server A:", data.input);
-  res.send('Input received and stored.');
+  res.send("Input received and stored.");
 });
 
 export const responderServer = functions.firestore
